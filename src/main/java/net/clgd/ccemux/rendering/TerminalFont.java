@@ -122,9 +122,10 @@ public class TerminalFont {
 		Palette newPalette = terminal.getPalette();
 		for (int i = 0; i < 16; i++) {
 			float[] col = oldPalette.getColour(15-i);
-			float[] col2 = newPalette.getColour(15-i);
-			if (col[0] != col2[0] || col[1] != col2[1] || col[2] != col2[2]) {
-				tinted[i] = Utils.makeTintedCopy(base, new Color(col2[0], col2[1], col2[2]));
+			float[] newcol = newPalette.getColour(15-i);
+			if (col[0] != newcol[0] || col[1] != newcol[1] || col[2] != newcol[2]) {
+				tinted[i] = Utils.makeTintedCopy(base, new Color(newcol[0], newcol[1], newcol[2]));
+				oldPalette.setColour(15-i,newcol[0],newcol[1],newcol[2]);
 			}
 		}
 	}
