@@ -1,8 +1,8 @@
 {
 	"ccModule": "ComputerCraft",
-	"ccRevision": 1.79,
+	"ccRevision": 1.8,
 	"ccExt": "jar",
-	"ccPatternRemote": "https://addons-origin.cursecdn.com/files/2291/384/[module][revision].[ext]",
+	"ccPatternRemote": "https://raw.githubusercontent.com/goodguyanon/things/master/CC/[module][revision].[ext]",
 	"ccPatternLocal": "[module][revision].[ext]",
 	
 	"termWidth": 51,
