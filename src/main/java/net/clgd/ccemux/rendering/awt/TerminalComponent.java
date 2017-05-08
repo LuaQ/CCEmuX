@@ -80,7 +80,7 @@ class TerminalComponent extends Canvas {
 				for (int x = 0; x < terminal.getWidth(); x++) {
 					int width = (x == 0 || x == terminal.getWidth() - 1) ? pixelWidth + margin : pixelWidth;
 
-					g.setColor(Utils.getCCColourFromChar((bgLine == null) ? 'f' : bgLine.charAt(x)));
+					g.setColor(Utils.getCCColourFromChar(terminal, (bgLine == null) ? 'f' : bgLine.charAt(x)));
 					g.fillRect(dx, dy, width, height);
 
 					char character = (textLine == null) ? ' ' : textLine.charAt(x);
