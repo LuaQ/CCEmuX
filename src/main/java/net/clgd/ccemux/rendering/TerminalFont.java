@@ -1,5 +1,9 @@
 package net.clgd.ccemux.rendering;
 
+import dan200.computercraft.shared.util.Palette;
+import dan200.computercraft.core.terminal.Terminal;
+
+import java.awt.Color;
 import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
@@ -51,6 +55,8 @@ public class TerminalFont {
 				f1.getHorizontalScale() + f1.getVerticalScale())).findFirst().orElse(null);
 	}
 
+	private Palette oldPalette;
+
 	private final URL source;
 
 	private final double horizontalScale, verticalScale;
@@ -73,14 +79,15 @@ public class TerminalFont {
 
 		tinted = new BufferedImage[16];
 		for (int i = 0; i < tinted.length; i++) {
-			tinted[i] = Utils.makeTintedCopy(base, Utils.getCCColourFromInt(i));
+			float[] col = oldPalette.getColour(15-i);
+			tinted[i] = Utils.makeTintedCopy(base, new Color(col[0], col[1], col[2]));
 		}
 	}
 
 	public Rectangle getCharCoords(char c) {
 		int charcode = (int) c;
 		return new Rectangle(charcode % COLUMNS * getCharWidth(), charcode / ROWS * getCharHeight(), getCharWidth(),
-				getCharHeight());
+				     getCharHeight());
 	}
 
 	public URL getSource() {
@@ -109,5 +116,16 @@ public class TerminalFont {
 
 	public int getCharHeight() {
 		return charHeight;
+	}
+
+	public void retint(Terminal terminal) {
+		Palette newPalette = terminal.getPalette();
+		for (int i = 0; i < 16; i++) {
+			float[] col = oldPalette.getColour(15-i);
+			float[] col2 = newPalette.getColour(15-i);
+			if (col[0] != col2[0] || col[1] != col2[1] || col[2] != col2[2]) {
+				tinted[i] = Utils.makeTintedCopy(base, new Color(col2[0], col2[1], col2[2]));
+			}
+		}
 	}
 }
