@@ -7,6 +7,7 @@ import java.awt.Rectangle;
 
 import dan200.computercraft.core.terminal.Terminal;
 import dan200.computercraft.core.terminal.TextBuffer;
+
 import net.clgd.ccemux.Utils;
 import net.clgd.ccemux.emulation.CCEmuX;
 import net.clgd.ccemux.rendering.TerminalFont;
@@ -66,6 +67,8 @@ class TerminalComponent extends Canvas {
 
 			int dx = 0;
 			int dy = 0;
+
+			font.retint(terminal);
 
 			for (int y = 0; y < terminal.getHeight(); y++) {
 				TextBuffer textLine = terminal.getLine(y);
