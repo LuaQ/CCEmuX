@@ -76,6 +76,8 @@ public class TerminalFont {
 
 		charWidth = (int) Math.round(BASE_CHAR_WIDTH * horizontalScale);
 		charHeight = (int) Math.round(BASE_CHAR_HEIGHT * verticalScale);
+		
+		oldPalette = new Palette();
 
 		tinted = new BufferedImage[16];
 		for (int i = 0; i < tinted.length; i++) {
