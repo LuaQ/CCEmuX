@@ -1,6 +1,7 @@
 package net.clgd.ccemux;
 
 import dan200.computercraft.shared.util.Colour;
+import dan200.computercraft.core.terminal.Terminal;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
@@ -13,13 +14,13 @@ public class Utils {
 		return BASE_16.indexOf(String.valueOf(c).toLowerCase());
 	}
 
-	public static Color getCCColourFromInt(int i) {
-		Colour col = Colour.fromInt(15 - i);
-		return col == null ? Color.WHITE : new Color(col.getR(), col.getG(), col.getB());
+	public static Color getCCColourFromInt(Terminal terminal, int i) {
+		float[] col = terminal.getPalette().getColour(15 - i);
+		return new Color(col[0], col[1], col[2]);
 	}
 
-	public static Color getCCColourFromChar(char c) {
-		return getCCColourFromInt(base16ToInt(c));
+	public static Color getCCColourFromChar(Terminal terminal, char c) {
+		return getCCColourFromInt(terminal, base16ToInt(c));
 	}
 
 	public static BufferedImage makeTintedCopy(BufferedImage bi, Color tint) {
